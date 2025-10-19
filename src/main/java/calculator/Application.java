@@ -12,6 +12,5 @@ public class Application {
         String userInput = Console.readLine();
         int calcResult = Calculation.calculate(userInput, delimiter, delimPattern);
         System.out.println("결과 : "+calcResult);
-
     }
 }

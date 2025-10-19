@@ -14,7 +14,7 @@ public class Calculation {
         }
 
         // 기본 구분자 포함 문자열
-        else if (Validation.validate(userInput, delimiter, delimPattern) == 1 ) {
+        else if (Validation.validate(userInput, delimiter, delimPattern) == 1) {
 
             String[] intStr = userInput.split("[" + delimiter + "]");
 
@@ -22,17 +22,15 @@ public class Calculation {
 
                 if (intStr[i] == "") {
                     result += 0;
-                }
-
-                else {
+                } else {
                     result += Integer.parseInt(intStr[i]);
                 }
             }
         }
 
 
-// 커스텀 구분자 포함 문자열
-        else if(Validation.validate(userInput, delimiter, delimPattern) == 2 ) {
+        // 커스텀 구분자 포함 문자열
+        else if (Validation.validate(userInput, delimiter, delimPattern) == 2) {
 
             Pattern pattern = Pattern.compile(delimPattern);
             Matcher matcher = pattern.matcher(userInput);
@@ -43,7 +41,13 @@ public class Calculation {
                 String customInput = matcher.group(2);
 
 
-                if(customInput.matches("^["+customDelimiter+ "0-9"+"]+$")) {
+                if (customDelimiter == "") {
+                    throw new IllegalArgumentException("커스텀 구분자가 설정되지 않았습니다.");
+                } else if (customDelimiter.matches("[0-9]")) {
+                    throw new IllegalArgumentException("커스텀 구분자는 숫자가 될 수 없습니다.");
+                } else if (customDelimiter.length() > 1) {
+                    throw new IllegalArgumentException("커스텀 구분자는 문자열이 될 수 없습니다.");
+                } else if (customInput.matches("^[" + customDelimiter + "0-9" + "]+$")) {
 
                     String[] intStr = customInput.split(customDelimiter);
 
@@ -55,15 +59,19 @@ public class Calculation {
                             result += Integer.parseInt(intStr[i]);
                         }
                     }
-
+                } else {
+                    throw new IllegalArgumentException("커스텀 구분자 외의 문자가 사용되었습니다.");
                 }
+
+            } else {
+                throw new IllegalArgumentException("커스텀 구분자가 올바르게 설정되지 않았습니다.");
+            }
         }
-
-
+            else {
+            throw new IllegalArgumentException("올바르지 않은 문법의 문자열입니다.");
         }
 
 
         return result;
-
     }
 }
