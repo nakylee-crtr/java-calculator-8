@@ -13,6 +13,23 @@ public class Calculation {
             result += 0;
         }
 
+        // 기본 구분자 포함 문자열
+        else if (Validation.validate(userInput, delimiter, delimPattern) == 1 ) {
+
+            String[] intStr = userInput.split("[" + delimiter + "]");
+
+            for (int i = 0; i < intStr.length; i++) {
+
+                if (intStr[i] == "") {
+                    result += 0;
+                }
+
+                else {
+                    result += Integer.parseInt(intStr[i]);
+                }
+            }
+        }
+
 
         return result;
 
