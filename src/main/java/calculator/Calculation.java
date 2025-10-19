@@ -31,6 +31,38 @@ public class Calculation {
         }
 
 
+// 커스텀 구분자 포함 문자열
+        else if(Validation.validate(userInput, delimiter, delimPattern) == 2 ) {
+
+            Pattern pattern = Pattern.compile(delimPattern);
+            Matcher matcher = pattern.matcher(userInput);
+
+            if (matcher.find()) {
+
+                String customDelimiter = matcher.group(1);
+                String customInput = matcher.group(2);
+
+
+                if(customInput.matches("^["+customDelimiter+ "0-9"+"]+$")) {
+
+                    String[] intStr = customInput.split(customDelimiter);
+
+                    for (int i = 0; i < intStr.length; i++) {
+
+                        if (intStr[i] == "") {
+                            result += 0;
+                        } else {
+                            result += Integer.parseInt(intStr[i]);
+                        }
+                    }
+
+                }
+        }
+
+
+        }
+
+
         return result;
 
     }

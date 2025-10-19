@@ -13,6 +13,10 @@ public class Validation {
             return 1;
         }
 
+        else if(userInput.charAt(0)=='/' && userInput.matches(delimPattern)) {
+
+            return 2;
+        }
 
         else {
 
